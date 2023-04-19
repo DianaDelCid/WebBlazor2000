@@ -1,6 +1,7 @@
 using Blazor;
 using Blazor.Interfaces;
 using Blazor.Servicios;
+using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddResponseCompression();
 builder.Services.AddControllers();
+builder.Services.AddSweetAlert2(); //Servicio de sweet alert 2
 
 var app = builder.Build();
 

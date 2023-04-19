@@ -41,7 +41,7 @@ namespace Datos.Repositorios
         }
 
         //METODO PARA ELIMINAR REGISTRO 
-        public async Task<bool> EliminarAsync(string codigo)
+        public async Task<bool> EliminarAsync(string codigoUsuario)
         {
             bool resultado = false;
             try
@@ -50,7 +50,7 @@ namespace Datos.Repositorios
                 await _conexion.OpenAsync(); //abre la conexion asincrona
                 string sql = "DELETE FROM usuario WHERE CodigoUsuario = @CodigoUsuario;";
                 //Convertirlo en Boleano
-                resultado = Convert.ToBoolean(await _conexion.ExecuteAsync(sql, new { codigo }));
+                resultado = Convert.ToBoolean(await _conexion.ExecuteAsync(sql, new { codigoUsuario }));
             }
             catch (Exception)
             {

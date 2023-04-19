@@ -1,0 +1,59 @@
+﻿@page "/Usuarios/Editar/{CodigoUsuario}"
+
+<AuthorizeView Roles="Administrador">
+    <Authorized Context="AutenticationState">
+        <h3>Editar Usuario</h3>
+        <EditForm Model="@user">
+            <DataAnnotationsValidator /> <!--Para mostrar errores de navegacion-->
+
+            <!--CODIGO PARA MOSTRAR LOS DATOS DE USUARIO-->
+            <div class="form-group row">
+                <label for="CodigoUsuario" class="col-sm-2 col-form-label">
+                    Código Usuario
+                </label>
+                <div class="col-sm-10">
+                    <label for="CodigoUsuario" class="col-form-label">
+                        @user.CodigoUsuario
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <!--EEEEEE-->
+                <label for="Nombre" class="col-sm-2 col-form-label">
+                    Nombre
+                </label>
+                <div class="col-sm-10">
+                    <InputText id="Nombre" class="form-control" @bind-Value="user.Nombre" /> <!--Para que pueda editar-->
+                    <ValidationMessage For="@(() => user.Nombre)" /> <!--valida si esta vacio-->
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <!--EEEEEE-->
+                <label for="Contrasena" class="col-sm-2 col-form-label">
+                    Contraseña
+                </label>
+                <div class="col-sm-10">
+                    <InputText id="Contrasena" type="password" class="form-control" @bind-Value="user.Contrasena" /> <!--Para que pueda editar, type para que no se visualice la contraseña-->
+                    <ValidationMessage For="@(() => user.Contrasena)" /> <!--valida si esta vacio-->
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <!--EEEEEE-->
+                <label for="Correo" class="col-sm-2 col-form-label">
+                    Correo
+                </label>
+                <div class="col-sm-10">
+                    <InputText id="Correo" type="email" class="form-control" @bind-Value="user.Correo" /> <!--Para que pueda editar, type para que no se visualice la contraseña-->
+                </div>
+            </div>
+
+        </EditForm>
+
+    </Authorized>
+    <NotAuthorized>
+        <h3>No tiene permisos para esta Ruta</h3>
+    </NotAuthorized>
+</AuthorizeView>

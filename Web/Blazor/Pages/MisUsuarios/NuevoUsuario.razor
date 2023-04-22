@@ -1,20 +1,19 @@
-﻿@page "/Usuarios/Editar/{CodigoUsuario}"
+﻿@page "/Usuarios/Nuevo"
 
 <AuthorizeView Roles="Administrador">
     <Authorized Context="AutenticationState">
-        <h3>Editar Usuario</h3>
+        <h3>Nuevo Usuario</h3>
         <EditForm Model="@user">
             <DataAnnotationsValidator /> <!--Para mostrar errores de navegacion-->
-
             <!--CODIGO PARA MOSTRAR LOS DATOS DE USUARIO-->
             <div class="form-group row">
                 <label for="CodigoUsuario" class="col-sm-2 col-form-label">
                     Código Usuario
                 </label>
                 <div class="col-sm-10">
-                    <label for="CodigoUsuario" class="col-form-label">
-                        @user.CodigoUsuario
-                    </label>
+                    <!--Etiqueta para ingresar datos-->
+                    <InputText id="CodigoUsuario" class="form-control" @bind-Value="user.CodigoUsuario" />
+                    <ValidationMessage For="@(() => user.CodigoUsuario)" /> <!--valida si esta vacio-->
                 </div>
             </div>
 
@@ -52,13 +51,14 @@
                     Rol
                 </label>
                 <div class="col-sm-10">
-                    <InputSelect class="form-control" @bind-Value="user.Rol"><!--Para que pueda editar-->
+                    <InputSelect class="form-control" @bind-Value="user.Rol">
+                        <!--Para que pueda editar-->
                         <!--Iteramos el enumerable-->
-                        @foreach(var rol in Enum.GetValues(typeof(Roles)))
+                        @foreach (var rol in Enum.GetValues(typeof(Roles)))
                         {
                             <option value="@rol">@rol</option>
                         }
-                    </InputSelect> 
+                    </InputSelect>
                     <ValidationMessage For="@(() => user.Rol)" /> <!--valida si esta vacio-->
                 </div>
             </div>
@@ -82,7 +82,7 @@
             </div>
 
 
-             <div class="form-group row">
+            <div class="form-group row">
                 <label for="FechaCreacion" class="col-sm-2 col-form-label">
                     Fecha Creación
                 </label>
@@ -107,12 +107,10 @@
                 <p>
                     <input type="submit" class="btn btn-primary" value="Guardar" @onclick="Guardar" /> <!--Evento onclick donde llamamos el metodo-->
                     <input type="submit" class="btn btn-danger" value="Cancelar" @onclick="Cancelar" />
-                    <input type="submit" class="btn btn-warning" value="Eliminar" @onclick="Eliminar" />
                 </p>
             </div>
 
         </EditForm>
-
     </Authorized>
     <NotAuthorized>
         <h3>No tiene permisos para esta Ruta</h3>

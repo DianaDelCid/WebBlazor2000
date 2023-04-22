@@ -5,6 +5,13 @@
     <Authorized Context="AutenticationState"> <!--Captura el estado del usuario-->
         <h3>Listas de Usuarios</h3>
 
+        <!--Boton para agregar nuevo registro-->
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <a href="/Usuarios/Nuevo" class="btn btn-primary m-">Nuevo</a>
+            </div>
+        </div>
+
         @if (lista == null)
         {
             <p>No existen usurios en el sistema</p>
@@ -31,7 +38,17 @@
                             <th>@user.Nombre</th>
                             <th>@user.Correo</th>
                             <th>@user.Rol</th>
-                            <th>@user.Foto</th>
+                            <!--Validar foto-->
+                            @if (user.Foto != null)
+                            {
+                                <th>
+                                    <img width="40" height="40" src="data:image;base64,@System.Convert.ToBase64String(user.Foto)" /> <!--Etiqueta de Html para imagen-->
+                                </th>
+                            }
+                            else
+                            {
+                                <th></th>
+                            }
                             <th>@user.FechaCreacion</th>
                             @if (user.EstaActivo)
                             {
